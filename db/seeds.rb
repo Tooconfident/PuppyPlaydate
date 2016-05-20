@@ -1,7 +1,7 @@
-require 'Faker'
+require 'faker'
 
 5.times.map do
-  User.create(username: Faker::Name.name, email: Faker::Internet.email, password: "123")
+  User.create!(username: Faker::Internet.user_name, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: "123")
 end
 
 Dog.create(name: "Jayda", breed: "Golden Retriever", age: 2, temperment: "shy", owner_id: 1)
@@ -13,4 +13,4 @@ Dog.create(name: "Ella", breed: "Yellow Lab", age: 11, temperment: "sharp-shy", 
 
 Playdate.create(group_name: "Doggie Daycare", location: "Petaluma, CA", meet_time: "Saturdays at 9am", creator_id: rand(1..5))
 
-# Matchup.create(dog_id: rand(1..5), playdate_id: 1)
+Matchup.create(dog_id: rand(1..5), playdate_id: 1)
