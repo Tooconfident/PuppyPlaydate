@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 	has_many :dogs, foreign_key: :owner_id
-	has_many :created_playdates, foreign_key: :creator_id
+	has_many :created_playdates, {class_name: "Playdate", foreign_key: :creator_id}
 
 	validates :username, :first_name, :last_name, :email, :password_hash, presence: true
 	validates :username, uniqueness: true
