@@ -1,1 +1,13 @@
-hi!
+<div class="container">
+  <div class="row">
+    <div class="span4">
+      <h1 class="text-center"> Welcome to PuppyPlaydate </h1>
+      <img class="center-block" src="/images/front_page.png" />
+      <% if logged_in? %>
+      <h1 class="text-center"> Go to your profile to find a playdate near you! </h1>
+      <% else %>
+      <h1 class="text-center"> Please Sign in to find a playdate or create a new dog profile! </h1>
+      <% end %>
+    </div>
+  </div>
+</div>
