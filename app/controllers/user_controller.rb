@@ -11,7 +11,7 @@ end
 
 #create new user
 post '/users' do
-	user = User.new(username: params[:username], email: params[:email])
+	user = User.new(username: params[:username], first_name: params[:first_name], email: params[:email])
 	user.password = params[:password]
 	if user.save
 		session[:id] = user.id

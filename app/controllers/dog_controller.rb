@@ -16,7 +16,7 @@ end
 #create new dog
 post '/dogs' do
   redirect '/sessions/new' if session[:id].nil?
-  @new_dog = Dog.new(title: params[:title], body: params[:body], user_id: current_user.id)
+  @new_dog = Dog.new(name: params[:name], breed: params[:breed], age: params[:age], temperment: params[:temperment], owner_id: current_user.id)
   if @new_dog.save
     redirect '/dogs'
   else
