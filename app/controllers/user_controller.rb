@@ -1,26 +1,17 @@
 #show all users
-get '/users' do
-	@users = User.all
-	erb :'/users/user_index'
+get '/users/:id' do
+  @user = User.find(params[:id])
+  erb :'users/user_show'
 end
 
-#new user form
-get '/users/new' do
-	erb :'/users/user_new'
-end
-
-#create new user
 post '/users' do
-	user = User.new(username: params[:username], first_name: params[:first_name], email: params[:email])
-	user.password = params[:password]
-	if user.save
-		session[:id] = user.id
-		redirect '/'
-	else
-		# status 400
-		# flash[:errors] = user.errors.full_messages
-		redirect '/users/new'
-	end
+  @user = User.new(params[:user])
+  if @user.save
+  	session[:user_id] = @user.id
+    redirect "/users/#{@user.id}"
+  else
+    erb :'users/user_new'
+  end
 end
 
 #get edit page
