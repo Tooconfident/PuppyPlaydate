@@ -1,9 +1,10 @@
 class User < ActiveRecord::Base
-	has_many :dogs
+	has_many :dogs, foreign_key: :owner_id
 	has_many :created_playdates, foreign_key: :creator_id
 
 	validates :username, :first_name, :last_name, :email, :password_hash, presence: true
-	validates :username, :email, uniqueness: true
+	validates :username, uniqueness: true
+	validates :email, uniqueness: true, format: { with: /\A.+@.+\..+/, message: "please add valid password e.g. doge@wow.plz" }
 
 
 	def password

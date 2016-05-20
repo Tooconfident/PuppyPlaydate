@@ -1,12 +1,13 @@
 class CreateDogs < ActiveRecord::Migration
   def change
     create_table :dogs do |t|
-      t.string :name
-      t.string :breed
-      t.string :age
-      t.string :temperment
-      t.integer :user_id
-      t.timestamps
+      t.string  :name
+      t.string  :breed
+      t.integer :age
+      t.string  :temperment
+      t.integer :owner_id
+
+      t.timestamps null: false
     end
   end
 end

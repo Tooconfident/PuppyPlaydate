@@ -1,59 +1,59 @@
 #show all users
-get '/templates' do
-  @templates = Template.all
-  erb :'templates/index'
+get '/dogs' do
+  @dogs = Dog.all
+  erb :'dogs/index'
 end
 
-#new template form
-get '/templates/new' do
+#new dog form
+get '/dogs/new' do
   if logged_in
-    erb :'templates/new'
+    erb :'dogs/new'
   else
-    redirect '/templates'
+    redirect '/dogs'
   end
 end
 
-#create new template
-post '/templates' do
+#create new dog
+post '/dogs' do
   redirect '/sessions/new' if session[:id].nil?
-  @new_template = Template.new(title: params[:title], body: params[:body], user_id: current_user.id)
-  if @new_template.save
-    redirect '/templates'
+  @new_dog = Dog.new(title: params[:title], body: params[:body], user_id: current_user.id)
+  if @new_dog.save
+    redirect '/dogs'
   else
-    redirect '/templates/new'
+    redirect '/dogs/new'
   end
 end
 
 #get edit page
-get '/templates/:id/edit' do
-  @template = Template.find(params[:id])
-  if allow_edit(@template)
-    erb :'/templates/edit'
+get '/dogs/:id/edit' do
+  @dog = Dog.find(params[:id])
+  if allow_edit(@dog)
+    erb :'/dogs/edit'
   else
-    redirect "/templates/#{params[:id]}"
+    redirect "/dogs/#{params[:id]}"
   end
 end
 
-#show a template
-get '/templates/:id' do
-  @template = Template.find(params[:id])
-  erb :'/templates/show'
+#show a dog
+get '/dogs/:id' do
+  @dog = Dog.find(params[:id])
+  erb :'/dogs/show'
 end
 
-#submit template edit
-put '/templates/:id' do
-  @template = Template.find(params[:id])
-  @template.update(body: params[:body], title: params[:title])
-  redirect "templates/#{@template.id}"
+#submit dog edit
+put '/dogs/:id' do
+  @dog = Dog.find(params[:id])
+  @dog.update(body: params[:body], title: params[:title])
+  redirect "dogs/#{@dog.id}"
 end
 
-#delete template
-delete '/templates/:id' do
-  @template = Template.find(params[:id])
-  if allow_edit(@template)
-    @template.destroy
-    redirect "/templates"
+#delete dog
+delete '/dogs/:id' do
+  @dog = Dog.find(params[:id])
+  if allow_edit(@dog)
+    @dog.destroy
+    redirect "/dogs"
   else
-    redirect "/templates/#{params[:id]}"
+    redirect "/dogs/#{params[:id]}"
   end
 end
