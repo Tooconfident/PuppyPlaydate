@@ -25,14 +25,14 @@ post '/dogs' do
 end
 
 #get edit page
-get '/dogs/:id/edit' do
-  @dog = Dog.find(params[:id])
-  if allow_edit(@dog)
-    erb :'/dogs/edit'
-  else
-    redirect "/dogs/#{params[:id]}"
-  end
-end
+# get '/dogs/:id/edit' do
+#   @dog = Dog.find(params[:id])
+#   if allow_edit(@dog)
+#     erb :'/dogs/edit'
+#   else
+#     redirect "/dogs/#{params[:id]}"
+#   end
+# end
 
 #show a dog
 get '/dogs/:id' do

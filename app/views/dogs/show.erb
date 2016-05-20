@@ -1,13 +1,24 @@
-<h1><%= @dog.title %></h1>
-<h2>By: <%= @dog.user.username %></h2>
-<p><%= @dog.body %></p>
-<% if allow_edit(@dog) %>
-  <a href="/dogs/<%= @dog.id %>/edit">edit</a>
-    <form class="template-delete button" action="/dogs/<%= @dog.id %>" method="post">
-    <input type="hidden" name="_method" value="delete">
-    <input type="submit" value="delete dog" class="template-delete">
-  </form>
-<% end %>
+<h1><%= @dog.name %></h1>
+<h2>Owner: <%= @dog.owner.username %></h2>
+<div class="col-sm-4">
+  <img class="img-thumbnail" style="width:100%" <img src="/images/link.png">
+<br>
+<br>
+<p>Breed: <%= @dog.breed %></p>
+<p>Age: <%= @dog.age %></p>
+<p>Temperment: <%= @dog.temperment %></p>
+
+<h2><a href="/playdates/index">FIND A PLAYDATE!</a></h2>
+<br>
+<br>
+
+<a href="/dogs/<%= @dog.id %>/edit">edit</a>
+<form class="template-delete button" action="/dogs/<%= @dog.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="delete dog" class="template-delete">
+</form>
+</div>
+
 
 
 
