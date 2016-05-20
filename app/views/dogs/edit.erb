@@ -1,0 +1,9 @@
+<h1>Edit new dog information</h1>
+<form action="/dogs/<%= @dog.id %>" method="post">
+<input type="hidden" name="_method" value="put">
+<input type="text" name="title" value="<%= @dog.title %>">
+<input type="text" name="tag" placeholder="enter a new tag">
+<textarea name="body" value="<%= @dog.body %>"></textarea>
+<input type="submit" value="Update">
+</form>
+<a href="/dogs">Home</a>

@@ -1,15 +1,16 @@
 require 'Faker'
 
-20.times.map do
-  User.create!(username: Faker::Name.name, email: Faker::Internet.email, password: "1234")
+5.times.map do
+  User.create(username: Faker::Name.name, email: Faker::Internet.email, password: "123")
 end
 
+Dog.create(name: "Jayda", breed: "Golden Retriever", age: 2, temperment: "shy", owner_id: 1)
+Dog.create(name: "Tenley", breed: "Pug", age: 14, temperment: "sharp", owner_id: 2)
+Dog.create(name: "Link", breed: "Muppet", age: 1, temperment: "sound", owner_id: 3)
+Dog.create(name: "Rocco", breed: "Chihuahua", age: 13, temperment: "submissive", owner_id: 4)
+Dog.create(name: "Ella", breed: "Yellow Lab", age: 11, temperment: "sharp-shy", owner_id: 5)
 
-50.times.map do
-  Template.create!(title: "#{Faker::Hacker.say_something_smart}?", body: Faker::Hacker.say_something_smart, user_id: rand(1..20), created_at: Faker::Time.between(DateTime.now - 1, DateTime.now))
-end
 
-User.create(username: "Eric Dell'Aringa", email: "edella2@gmail.com", password: "1234")
+Playdate.create(group_name: "Doggie Daycare", location: "Petaluma, CA", meet_time: "Saturdays at 9am", creator_id: rand(1..5))
 
-Template.create(title: "Basic Crud template made for DBC students", body: "Feel free to add to this as you will.  This is a skeleton that you can use on most CRUD apps. There are helper methods written in this as well to make checking which user is currently logged in, if the user should have access to edit/delete a post etc.  Message me on slack or email if you have questions", user_id: 21, created_at: "Tue, 15 Dec 2015 15:06:29 -0800")
-
+# Matchup.create(dog_id: rand(1..5), playdate_id: 1)
