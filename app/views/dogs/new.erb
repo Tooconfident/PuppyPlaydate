@@ -1,10 +1,14 @@
 <h1>Create a dog</h1>
 <form action="/dogs" method ="post">
-  <label for="name">dog Title:</label>
-  <input type="text" name="title" placeholder="enter a title">
-  <input type="text" name="tag" placeholder="enter a new tag">
-  <textarea name="body" placeholder="Enter dog body"></textarea>
+  <label for="dog[name]">DOG NAME:</label>
+  <input type="text" name="dog[name]" placeholder="doge">
+  <label for="dog[age]">AGE:</label>
+  <input type="text" name="dog[age]" placeholder="5">
+  <label for="dog[breed]">BREED:</label>
+  <input type="text" name="dog[breed]" placeholder="doodle">
+  <label for="dog[temperment]">TEMPERMENT:</label>
+  <input type="text" name="dog[temperment]" placeholder="temperment">
   <input type="submit" value="Create" class="button">
 </form>
 
-<p><a href="/dogs">Home</a></p>
+<p><a href="/user/<%= current_user.id %>">Profile</a></p>

@@ -1,59 +1,35 @@
-#show all users
-get '/dogs' do
-  @dogs = Dog.all
-  erb :'dogs/index'
+get "/dogs/new" do
+  erb :"dogs/new"
 end
 
-#new dog form
-get '/dogs/new' do
-  if logged_in
-    erb :'dogs/new'
+post "/dogs" do
+  @dog = Dog.new(params[:input])
+  @dog.owner_id = current_user_id
+
+  if @dog.save
+    redirect "/"
   else
-    redirect '/dogs'
+    @error_msgs = @dog.errors.full_messages
+    erb :"dogs/new"
   end
 end
 
-#create new dog
-post '/dogs' do
-  redirect '/sessions/new' if session[:id].nil?
-  @new_dog = Dog.new(name: params[:name], breed: params[:breed], age: params[:age], temperment: params[:temperment], owner_id: current_user.id)
-  if @new_dog.save
-    redirect '/dogs'
-  else
-    redirect '/dogs/new'
-  end
+get "/dogs/:dog_id" do
+  @dog = Dog.find(params[:dog_id])
+  erb :"dogs/show"
 end
 
-#get edit page
-# get '/dogs/:id/edit' do
-#   @dog = Dog.find(params[:id])
-#   if allow_edit(@dog)
-#     erb :'/dogs/edit'
-#   else
-#     redirect "/dogs/#{params[:id]}"
-#   end
-# end
-
-#show a dog
-get '/dogs/:id' do
-  @dog = Dog.find(params[:id])
-  erb :'/dogs/show'
+get "/dogs/:dog_id/edit" do
+  @dog = Dog.find(params[:dog_id])
+  erb :"dogs/edit"
 end
 
-#submit dog edit
-put '/dogs/:id' do
-  @dog = Dog.find(params[:id])
-  @dog.update(body: params[:body], title: params[:title])
-  redirect "dogs/#{@dog.id}"
+put "/dogs/:dog_id" do
+  @dog = Dog.find(params[:dog_id]).update_attributes(params[:dog])
+  redirect "/"
 end
 
-#delete dog
-delete '/dogs/:id' do
-  @dog = Dog.find(params[:id])
-  if allow_edit(@dog)
-    @dog.destroy
-    redirect "/dogs"
-  else
-    redirect "/dogs/#{params[:id]}"
-  end
+delete "/dogs/:dog_id" do
+  @dog = Dog.find(params[:dog_id]).destroy
+  redirect "/"
 end
