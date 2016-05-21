@@ -1,1 +1,3 @@
 # PuppyPlaydate
+
+This app is incomplete and very raw. It has been tabled for a rails final project pitch...
