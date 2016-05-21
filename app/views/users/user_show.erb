@@ -1,0 +1,35 @@
+<h1 class="text-center"><%=@user.username%></h1>
+
+<% @user.dogs.all.each do |dog| %>
+
+<div class="panel panel-danger">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><%= dog.name %> <a class="label label-danger" href="/dogs/<%=dog.id%>">Profile</a><a class="btn btn-primary pull-right btn-sm" role="button" data-toggle="collapse" href="#collapseDog<%= dog.id %>" aria-expanded="false" aria-controls="collapseDog<%= dog.id %>">Toggle Info</a></div>
+<!--   <div class="panel-body">
+  </div> -->
+
+  <!-- Table -->
+  <div class="collapse in" id="collapseDog<%= dog.id %>">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Breed</th>
+          <th>Age</th>
+          <th>Temperment</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td><%= dog.breed %></td>
+          <td><%= dog.age %></td>
+          <td><%= dog.temperment %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<a href="/dogs/new">ADD A DOG</a>
+
+<% end %>

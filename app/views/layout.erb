@@ -4,6 +4,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>PuppyPlaydate</title>
+
   <!--
     normalize.css removes cross-browser differences in defaults, e.g.,
     differences in how form elements appear between Firefox and IE
@@ -14,48 +17,77 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <!-- Bootstrap Theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-    <!--
+  <!--
     application.css is where you put your styles
   -->
   <link rel="stylesheet" href="/css/application.css">
-
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="/js/application.js"></script>
-
-  <title></title>
 </head>
 <body>
-<head>
-  <title>PuppyPlayDate</title>
-  <link rel="stylesheet" type="text/css" href="/css/index.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-</head>
 
-<body>
-  <header class="header">
-    <ul class="main-header">
-      <li class="left"><a href="#"><i class="fa fa-stack-exchange"></i>PuppyPlayDate</a></li>
-      <% if logged_in %>
-      <li class="right">
-        <form action="/sessions/<%= current_user.id %>" method="post">
-          <input type="hidden" name="_method" value="delete">
-          <input type="submit" value="logout" class="session-delete">
-        </form>
-      </li>
-      <% else %>
-      <li class="right"><a href="/users/new">SIGN UP</a></li>
-      <li class="right"><a href="/login">LOG IN</a></li>
-      <% end %>
-    </ul>
-  </header>
-  <div class="logos-filters">
-    <ul class="filter-templates">
-      <li><a href="/templates">templates</a></li>
-      <li><a href="/users">Users</a></li>
-      <li><a href="/templates/new">Ask template</a></li>
-    </ul>
+<div id="loginModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login</h4>
+      </div>
+      <div class="modal-body">
+        <%= erb :'users/login' %>
+      </div>
+    </div>
   </div>
-  <%= yield %>
+</div>
+
+<div id="registerModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Register</h4>
+      </div>
+      <div class="modal-body">
+        <%= erb :'users/user_new' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> PuppyPlaydate</a>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <% if logged_in? %>
+          <li><a href="/users/<%= current_user.id %>"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <%= current_user.username %></a></li>
+          <li><a href="/logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</a></li>
+        <% else %>
+          <li><a data-toggle="modal" data-target="#loginModal" href="#"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login</a></li>
+          <li><a data-toggle="modal" data-target="#registerModal" href="#"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Register</a></li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <%= yield %>
+    </div>
+  </div>
+
+  <!-- <footer class="row-footer">
+    <div class="container">
+      <div class="row text-center">
+        <span></span>
+      </div>
+    </div>
+  </footer> -->
+
+  <!-- jQuery -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <!-- Custom script -->
+  <script src="/js/application.js"></script>
 </body>
 </html>
-
